@@ -105,9 +105,9 @@
             e.preventDefault();
             e.stopPropagation();
             const rect = commentButton.getBoundingClientRect();
-            // Add scroll offset to get page coordinates
-            const x = rect.left + window.scrollX;
-            const y = rect.bottom + window.scrollY;
+            // Use viewport coordinates directly since popup is position: fixed
+            const x = rect.left;
+            const y = rect.bottom;
             showCommentPopup(x, y);
             hideCommentButton();
         });
@@ -851,7 +851,10 @@
             e.stopPropagation();
             // Only allow editing root comments without replies
             if (!comment.root_id && !hasReply) {
-                showEditCommentPopup(comment, highlight, e.pageX, e.pageY);
+                // Convert page coordinates to viewport coordinates for position: fixed popup
+                const x = e.clientX;
+                const y = e.clientY;
+                showEditCommentPopup(comment, highlight, x, y);
             }
         });
 
