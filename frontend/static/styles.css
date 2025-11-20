@@ -307,7 +307,7 @@ ul.contains-task-list li {
 
 /* Comment popup */
 #comment-popup {
-    position: absolute;
+    position: fixed;
     z-index: 1000;
     background: white;
     border: 1px solid #d1d5da;
